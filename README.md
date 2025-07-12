@@ -1,6 +1,6 @@
 # .github
-4. CI/CD with GitHub Actions
-4.1. Shared Reusable Workflow (`ci-template.yml` in `.github` repo)
+CI/CD with GitHub Actions
+1. Shared Reusable Workflow (`ci-template.yml` in `.github` repo)
 
 ```yaml
 name: Shared CI
@@ -17,16 +17,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Install dependencies
         run: sudo apt update && sudo apt install -y pandoc texlive-xetex shellcheck markdownlint
-
       - name: Lint shell scripts
         run: shellcheck scripts/*.sh
-
       - name: Lint markdown
         run: markdownlint PROJECT.md README.md
-
       - name: Build PDF
         run: |
           pandoc PROJECT.md --pdf-engine=xelatex \
@@ -40,7 +36,7 @@ jobs:
           git commit -m "Auto-update PDF" || echo "Nothing to commit"
           git push
 ```
-4.2. Stub Workflow (`.github/workflows/ci.yml` in project repo)
+1.1. Stub Workflow (`.github/workflows/ci.yml` in project repo)
 
 ```yaml
 name: Build & Test
@@ -56,7 +52,7 @@ jobs:
 ```
 
 ---
-5. Automation Script for Stubs
+2. Automation Script for Stubs
 
 Place this on your workstation (e.g. `~/scripts/add-ci-stub.sh`):
 
@@ -94,7 +90,7 @@ chmod +x ~/scripts/add-ci-stub.sh
 
 ---
 
-6. Manual Testing Checklist
+3. Manual Testing Checklist
 
 1. **Script & Rule**  
    - Plug/unplug dock → verify `/var/log/gpu-switch.log` updates.  
@@ -113,7 +109,7 @@ chmod +x ~/scripts/add-ci-stub.sh
 
 ---
 
-7. Automating Tests Based on Documentation
+4. Automating Tests Based on Documentation
 
 You can extend your CI to **automatically test** every instruction:
 

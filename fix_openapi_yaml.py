@@ -319,10 +319,11 @@ def fix_cci_identifiers(content):
     # Pattern to match CCI x-faker blocks
     pattern = r"(example:\s*['\"]?\d{6}['\"]?)\s*\n\s+x-faker:\s*\n\s+random\.arrayElement:[\s\S]*?-\s+['\"]?\d{6}['\"]?"
 
-    # Escape backslashes in the enum string for use in regex replacement
-    replacement = r"\1\n          " + get_cci_enum().replace('\\', '\\\\')
+    # Use a replacement function to avoid backslash escaping issues
+    def replace_func(match):
+        return match.group(1) + "\n          " + get_cci_enum()
 
-    content = re.sub(pattern, replacement, content)
+    content = re.sub(pattern, replace_func, content)
 
     return content
 

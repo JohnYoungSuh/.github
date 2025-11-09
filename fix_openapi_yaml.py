@@ -220,7 +220,7 @@ def get_control_acronym_enum():
 
 def get_cci_enum():
     """Returns the proper enum for CCI identifiers."""
-    return """pattern: '^\\d{6}$'
+    return """pattern: '^\\\\d{6}$'
           enum:
             - '000001'
             - '000002'
